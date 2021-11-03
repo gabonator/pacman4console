@@ -1,8 +1,5 @@
 // Some variables that you may want to change
-#ifndef DATAROOTDIR
-#	define DATAROOTDIR "/usr/local/share"
-#endif
-#define LEVELS_FILE DATAROOTDIR "/pacman/Levels/level__.dat"
+#define LEVELS_FILE DATAROOTDIR "Levels/level__.dat"
 char LevelFile[] = LEVELS_FILE;		//Locations of default levels
 int FreeLife = 1000;			//Starting points for free life
 int Points = 0;				//Initial points
