@@ -12,7 +12,8 @@
 #include <curses.h>
 #include <string.h>
 #include <stdlib.h>
-#include <sys/timeb.h>
+#include <time.h>
+#include <unistd.h>
 #include "pacman.h"
 
 #define EXIT_MSG "Good bye!"
@@ -161,14 +162,14 @@ void CreateWindows(int y, int x, int y0, int x0) {
 
 void Delay() {
 
-	struct timeb t_start, t_current;
-	ftime(&t_start);
+        struct timespec t_start, t_current;
+        clock_gettime(CLOCK_REALTIME, &t_start);
 
 	//Slow down the game a little bit
 	do {
 		GetInput();
-		ftime(&t_current);
-	} while (abs(t_start.millitm - t_current.millitm) < SpeedOfGame);
+                clock_gettime(CLOCK_REALTIME, &t_current);
+        } while ((abs(t_start.tv_nsec - t_current.tv_nsec) / 1000000) < SpeedOfGame);
 }
 
 void DrawWindow() {
